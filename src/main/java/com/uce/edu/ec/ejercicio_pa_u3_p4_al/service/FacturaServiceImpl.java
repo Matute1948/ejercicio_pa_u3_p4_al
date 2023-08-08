@@ -28,13 +28,19 @@ public class FacturaServiceImpl implements IFacturaService{
 		detalleFactura.setCantidad(listPro.size());
         List<BigDecimal> list = new ArrayList<>();
         int con = 0;
+        BigDecimal sum = new BigDecimal(0);
         for (Producto producto : listPro) {
             list.add(con, producto.getPrecio());
             con++;
+            sum = sum.add(producto.getPrecio());
         }
-        
+        detalleFactura.setPrecioUnitario(list);
+        detalleFactura.setSubtotal(sum);
 		factura.setCedulaCliente(cedCliente);
 		factura.setFecha(LocalDate.now());
+        factura.setDetalleFactura(detalleFactura);
+        factura.setTotalFactura(sum);
+        this.facturaRepository.insertar(factura);
 
 
 
