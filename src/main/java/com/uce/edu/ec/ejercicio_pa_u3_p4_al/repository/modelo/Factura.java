@@ -3,6 +3,7 @@ package com.uce.edu.ec.ejercicio_pa_u3_p4_al.repository.modelo;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Factura {
     private String cedulaCliente;
     @Column(name = "fac_total_factura")
     private BigDecimal totalFactura;
-    @OneToOne(mappedBy = "factura")
+    @OneToOne(mappedBy = "factura", cascade = CascadeType.ALL)
     private DetalleFactura detalleFactura;
     public Integer getId() {
         return id;
